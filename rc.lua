@@ -41,13 +41,14 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/theme-sid.lua")
+chosen_theme = "theme-sid.lua"
+beautiful.init("~/.config/awesome/" .. chosen_theme)
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt" or "xterm"
-editor = os.getenv("EDITOR") or "gvim" or "nano"
+editor = os.getenv("EDITOR") or "vim" or "nano"
 --editor_cmd = terminal .. " -e " .. editor
-editor_cmd = editor
+editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -97,15 +98,16 @@ end
 myappmenu = {
     { "firefox-developer", "firefox-developer" },
     { "firefox", "firefox" },
-    { "chrome", "chrome" },
+    { "chrome", "google-chrome-stable" },
     { "file manager", "pcmanfm" },
+    { "vim", editor_cmd },
     { "terminal", terminal } 
 }
 
 myconfigmenu = {
    { "awesome rc.lua", editor_cmd .. " " .. awesome.conffile },
-   { "awesome theme.lua", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.config/awesome/theme-sid.lua" },
-   { "gvimrc", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.vim/gvimrc" }
+   { "awesome theme.lua", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.config/awesome/" .. chosen_theme },
+   { "vimrc", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.vim/vimrc" }
 }
 
 myawesomemenu = {
@@ -194,6 +196,7 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- param s means screen
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -218,27 +221,29 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywiboxt = awful.wibar({ position = "top", screen = s })
+    s.mywiboxtop = awful.wibar({ position = "top", screen = s })
     --s.mywiboxr = awful.wibar({ position = "right", screen = s })
-    s.mywiboxb = awful.wibar({ position = "bottom", screen = s })
+    s.mywiboxbottom = awful.wibar({ position = "bottom", screen = s })
 
     -- Add widgets to the wibox top
-    s.mywiboxt:setup {
+    s.mywiboxtop:setup {
         layout = wibox.layout.align.horizontal,
-        -- Left widgets
-        mylauncher,
+	{ -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mylayoutbox,
+            mylauncher,
+	},
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             mykeyboardlayout,
             mytextclock,
-            s.mylayoutbox,
         },
     }
 
     -- Add widgets to the wibox right
-    --s.mywiboxr:setup {
+    --s.mywiboxright:setup {
     --    layout = wibox.layout.align.vertical,
 	--{
           --  layout = wibox.layout.fixed.vertical,
@@ -247,13 +252,10 @@ awful.screen.connect_for_each_screen(function(s)
     --}
 
     -- Add widgets to the wibox bottom
-    s.mywiboxb:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            s.mypromptbox
-	},
-        s.mytaglist
+    s.mywiboxbottom:setup {
+        layout = wibox.layout.fixed.horizontal,
+        s.mytaglist,
+        s.mypromptbox
     }
 end)
 -- }}}
@@ -517,16 +519,17 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = true }
     },
 
-    -- Set terminal and gvim start on center of screen
-    { rule_any = { class = { "URxvt", "Gvim" }},
+    -- Set applications start on center of screen and floating
+    { rule_any = { class = { "URxvt", "Gvim", "Firefox", "Google-chrome" }},
       properties = { floating = true,
                      placement = awful.placement.centered
       }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+    { rule = { class = "Firefox" },
+      properties = { screen = 1, tag = "2" }
+    },
 }
 -- }}}
 
