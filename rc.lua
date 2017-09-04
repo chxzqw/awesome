@@ -94,11 +94,12 @@ end
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
+myappmenu = {
+    { "firefox-developer", "firefox-developer" },
+    { "firefox", "firefox" },
+    { "chrome", "chrome" },
+    { "file manager", "pcmanfm" },
+    { "terminal", terminal } 
 }
 
 myconfigmenu = {
@@ -107,9 +108,17 @@ myconfigmenu = {
    { "gvimrc", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.vim/gvimrc" }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+myawesomemenu = {
+   { "hotkeys", function() return false, hotkeys_popup.show_help end},
+   { "manual", terminal .. " -e man awesome" }
+}
+
+mymainmenu = awful.menu({ items = { { "applications", myappmenu, beautiful.awesome_icon },
 				    { "configurations", myconfigmenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+				    { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "open terminal", terminal },
+				    { "restart", awesome.restart },
+				    { "quit", function() awesome.quit() end }
                                   }
                         })
 
