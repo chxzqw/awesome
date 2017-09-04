@@ -41,11 +41,10 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/theme.lua")
+beautiful.init("~/.config/awesome/theme-sid.lua")
 
 -- This is used later as the default terminal and editor to run.
---terminal = "xterm"
-terminal = "urxvt"
+terminal = "urxvt" or "xterm"
 editor = os.getenv("EDITOR") or "gvim" or "nano"
 --editor_cmd = terminal .. " -e " .. editor
 editor_cmd = editor
@@ -102,13 +101,14 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
-myeditmenu = {
-   { "awesome", editor_cmd .. " " .. awesome.conffile },
-   { "gvim", editor_cmd }
+myconfigmenu = {
+   { "awesome rc.lua", editor_cmd .. " " .. awesome.conffile },
+   { "awesome theme.lua", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.config/awesome/theme-sid.lua" },
+   { "gvimrc", editor_cmd .. " " .. os.getenv( "HOME" ) .. "/.vim/gvimrc" }
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-				    { "edit configurations", myeditmenu, beautiful.awesome_icon },
+				    { "configurations", myconfigmenu, beautiful.awesome_icon },
                                     { "open terminal", terminal }
                                   }
                         })
