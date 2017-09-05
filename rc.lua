@@ -41,7 +41,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-chosen_theme = "theme-sid.lua"
+local chosen_theme = "theme-sid.lua"
 beautiful.init("~/.config/awesome/" .. chosen_theme)
 
 -- This is used later as the default terminal and editor to run.
