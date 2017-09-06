@@ -3,6 +3,7 @@
 -------------------------
 
 package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/awespme/rc.d/"
+local wallpapers = require("wallpapers")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
