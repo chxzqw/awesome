@@ -2,8 +2,8 @@
 -- Sid's awesome theme --
 -------------------------
 
-package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/awespme/rc.d/"
-local wallpapers = require("wallpapers")
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/awesome/rc.d/?.lua"
+local wallpapers = require("theme.wallpapers")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
@@ -131,4 +131,4 @@ theme.icon_theme = nil
 
 return theme
 
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4
