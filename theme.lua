@@ -16,8 +16,10 @@ local theme = {}
 --theme.font          = "sans 8"
 theme.font          = "source sans pro 12"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
+--theme.bg_normal     = "#222222"
+theme.bg_normal     = "black"
+--theme.bg_focus      = "#535d6c"
+theme.bg_focus      = "#365194"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
@@ -127,7 +129,11 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+--theme.icon_theme = nil
+theme.icon_theme = Papirus
+
+theme.wibar_height = 25
+theme.wibar_opacity = 0.95
 
 return theme
 

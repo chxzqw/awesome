@@ -115,8 +115,8 @@ myawesomemenu = {
    { "manual", terminal .. " -e man awesome" }
 }
 
-mymainmenu = awful.menu({ items = { { "applications", myappmenu, beautiful.awesome_icon },
-				    { "configurations", myconfigmenu, beautiful.awesome_icon },
+mymainmenu = awful.menu({ items = { { "applications", myappmenu },
+				    { "configurations", myconfigmenu },
 				    { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "open terminal", terminal },
 				    { "restart", awesome.restart },
