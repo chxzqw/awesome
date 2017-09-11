@@ -130,7 +130,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 --theme.icon_theme = nil
-theme.icon_theme = Papirus
+theme.icon_theme = "Papirus"
 
 theme.wibar_height = 25
 theme.wibar_opacity = 0.95

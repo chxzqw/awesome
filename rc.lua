@@ -101,6 +101,7 @@ myappmenu = {
     { "chrome", "google-chrome-stable" },
     { "file manager", "pcmanfm" },
     { "vim", editor_cmd },
+    { "gvim", 'gvim' },
     { "terminal", terminal } 
 }
 
